@@ -4,6 +4,70 @@
 
     
   <url>
+    <loc>http://www.cuixiaodi.com/posts/kafeifenlei.html</loc>
+    <lastmod>2016-10-15T05:52:06.685Z</lastmod>
+    <data>
+        <display>
+        <title>咖啡</title>
+        <pubTime>2016-10-08T02:15:18.000Z</pubTime>
+        
+        <tag>咖啡</tag>
+         
+        <tag>知识</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://www.cuixiaodi.com/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.cuixiaodi.com/posts/gongxiangdanche.html</loc>
+    <lastmod>2016-10-15T05:16:15.807Z</lastmod>
+    <data>
+        <display>
+        <title>共享单车</title>
+        <pubTime>2016-10-15T05:15:38.000Z</pubTime>
+        
+        <tag>ofo</tag>
+         
+        <tag>共享单车</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://www.cuixiaodi.com/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.cuixiaodi.com/posts/paidui.html</loc>
+    <lastmod>2016-10-15T05:02:46.312Z</lastmod>
+    <data>
+        <display>
+        <title>排队</title>
+        <pubTime>2016-10-15T05:02:19.000Z</pubTime>
+        
+        <tag>排队</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://www.cuixiaodi.com/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.cuixiaodi.com/posts/vrdiannao.html</loc>
     <lastmod>2016-10-11T09:00:56.119Z</lastmod>
     <data>
@@ -83,28 +147,6 @@
            
              
               <breadCrumb title="个人" url="http://www.cuixiaodi.com/categories/geren/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.cuixiaodi.com/posts/kafeifenlei.html</loc>
-    <lastmod>2016-10-08T09:39:42.485Z</lastmod>
-    <data>
-        <display>
-        <title>咖啡的分类</title>
-        <pubTime>2016-10-08T02:15:18.000Z</pubTime>
-        
-        <tag>咖啡</tag>
-         
-        <tag>知识</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://www.cuixiaodi.com/categories/%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>

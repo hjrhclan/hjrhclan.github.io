@@ -3,6 +3,28 @@
 
 
     
+    
+  <url>
+    <loc>http://www.cuixiaodi.com/posts/hello.html</loc>
+    <lastmod>2016-11-03T03:08:03.143Z</lastmod>
+    <data>
+        <display>
+        <title>占用您6分钟  认识一下</title>
+        <pubTime>2018-09-12T04:10:30.000Z</pubTime>
+        
+        <tag>简介</tag>
+         
+         
+           
+             
+              <breadCrumb title="个人" url="http://www.cuixiaodi.com/categories/geren/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
   <url>
     <loc>http://www.cuixiaodi.com/posts/bukeraoshu.html</loc>
     <lastmod>2016-11-03T01:25:58.369Z</lastmod>
@@ -65,26 +87,6 @@
            
              
               <breadCrumb title="网络" url="http://www.cuixiaodi.com/categories/wangluo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.cuixiaodi.com/posts/hello.html</loc>
-    <lastmod>2016-10-21T06:16:25.424Z</lastmod>
-    <data>
-        <display>
-        <title>占用您6分钟  认识一下</title>
-        <pubTime>2018-09-12T04:10:30.000Z</pubTime>
-        
-        <tag>简介</tag>
-         
-         
-           
-             
-              <breadCrumb title="个人" url="http://www.cuixiaodi.com/categories/geren/"/>
           
         </display>
     </data>
@@ -221,7 +223,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://www.cuixiaodi.com/posts/fadongji.html</loc>
     <lastmod>2016-09-23T10:17:34.460Z</lastmod>
@@ -241,7 +242,6 @@
     </data>
     </url>
 
-    
     
     
     

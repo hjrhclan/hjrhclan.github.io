@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.cuixiaodi.com/categories/index.html</loc>
+    
+    <lastmod>2017-02-10T01:11:21.239Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.cuixiaodi.com/tags/index.html</loc>
+    
+    <lastmod>2017-02-10T01:11:13.519Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.cuixiaodi.com/posts/hello.html</loc>
     
     <lastmod>2017-02-09T09:00:04.487Z</lastmod>
@@ -432,20 +446,6 @@
     <loc>http://www.cuixiaodi.com/posts/fadongji.html</loc>
     
     <lastmod>2016-09-23T10:17:34.460Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.cuixiaodi.com/tags/index.html</loc>
-    
-    <lastmod>2016-09-12T05:36:29.965Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.cuixiaodi.com/categories/index.html</loc>
-    
-    <lastmod>2016-09-12T05:36:25.723Z</lastmod>
     
   </url>
   

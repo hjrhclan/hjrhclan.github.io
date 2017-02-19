@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DigitalOcean,Shadowsocks,VPS,Ubuntu," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文介绍了 DigitalOcean VPS + Ubuntu 16.04.1 x64 + Shadowsocks 这三个工具结合，访问 Google.com的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DigitalOceanVPS与Ubuntu及SS穿墙">
+<meta property="og:url" content="http://www.cuixiaodi.com/posts/digitaloceanandubuntuanshadowsocks.html">
+<meta property="og:site_name" content="崔小迪的生产力工具室">
+<meta property="og:description" content="本文介绍了 DigitalOcean VPS + Ubuntu 16.04.1 x64 + Shadowsocks 这三个工具结合，访问 Google.com的方法。">
+<meta property="og:image" content="http://oboi7h1gj.bkt.clouddn.com/17-2-20/6065550-file_1487523747061_ec6a.png">
+<meta property="og:updated_time" content="2017-02-19T17:05:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DigitalOceanVPS与Ubuntu及SS穿墙">
+<meta name="twitter:description" content="本文介绍了 DigitalOcean VPS + Ubuntu 16.04.1 x64 + Shadowsocks 这三个工具结合，访问 Google.com的方法。">
+<meta name="twitter:image" content="http://oboi7h1gj.bkt.clouddn.com/17-2-20/6065550-file_1487523747061_ec6a.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.cuixiaodi.com/posts/digitaloceanandubuntuanshadowsocks.html"/>
+
+
+
+
+
+  <title> DigitalOceanVPS与Ubuntu及SS穿墙 | 崔小迪的生产力工具室 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">崔小迪的生产力工具室</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">苹果与戴尔全系产品核心代理</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-weixin">
+          <a href="/dianhua" rel="section">
+            
+            微信
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-baojia">
+          <a href="/baojia" rel="section">
+            
+            报价
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-taobao">
+          <a href="http://dtools.taobao.com" rel="section">
+            
+            淘宝
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/liuyan" rel="section">
+            
+            留言
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-coffee">
+          <a href="/coffee" rel="section">
+            
+            赠品
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://www.cuixiaodi.com/posts/digitaloceanandubuntuanshadowsocks.html">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="崔小迪">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/logocxdsmall.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="崔小迪的生产力工具室">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="崔小迪的生产力工具室" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                DigitalOceanVPS与Ubuntu及SS穿墙
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-20T01:03:57+08:00">
+                2017-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/wangluo/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/posts/digitaloceanandubuntuanshadowsocks.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/digitaloceanandubuntuanshadowsocks.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://oboi7h1gj.bkt.clouddn.com/17-2-20/6065550-file_1487523747061_ec6a.png" rel="gallery_cizcxiuzf0000b4us58a8nfa0"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://oboi7h1gj.bkt.clouddn.com/17-2-20/6065550-file_1487523747061_ec6a.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>本文介绍了 <code>DigitalOcean VPS</code> + <code>Ubuntu 16.04.1 x64</code> + <code>Shadowsocks</code> 这三个工具结合，访问 Google.com的方法。</p>
+<a id="more"></a>
+<hr>
+<p>相比于写生活的文章来说</p>
+<p>写技术性的文章就会简单的多</p>
+<p>因为技术性文章会有一个目标</p>
+<p>即要解决什么问题</p>
+<p>然后写出需要什么工具</p>
+<p>通过什么样的方法去实现</p>
+<p>再加上结果验证就行了</p>
+<p>这更像做数学题</p>
+<p>得到已知条件 通过一定的算法</p>
+<p>求解出答案</p>
+<p>如果题目过难 过于庞大</p>
+<p>就把题目拆分 把问题细化</p>
+<p>先解决具体的小问题</p>
+<p>最后再结合起来求出最终的结果</p>
+<hr>
+<p>在高考前专业划分的时候</p>
+<p>会接触到分文理班的情况</p>
+<p>理科班所要解决的问题偏向于逻辑性强的技术问题</p>
+<p>而文科班则更偏重于感性</p>
+<p>从大局观上来看是这个样子</p>
+<p>当然 一个学科学到精深的程度</p>
+<p>理性和感性就没有那么明显了</p>
+<p>比如《黑客与画家》的作者照样写出了优美的文字</p>
+<p>也比如历史教师袁腾飞老师也已经把历史事件分析出了逻辑</p>
+<p>这些都算是大家了 融会贯通的高手</p>
+<p>非一朝一夕能成也</p>
+<hr>
+<p>那么写生活的文章难点在哪里呢</p>
+<p>我觉得最关键的一点在于</p>
+<p>我们写出的很多文字有时候并不能得出一个明确的答案</p>
+<p>可能我们说了很多话讲了很多道理</p>
+<p>到最后都没有触及到生活的根本问题</p>
+<p>有时候我们觉得通过文字的逻辑所求得的答案</p>
+<p>实际上只不过是解决问题的一个已知条件而已</p>
+<p>生活的问题 牵扯到的随机因素太多</p>
+<p>每个人所遇到的人不一样 经历不一样</p>
+<p>经验不一样 阅历不一样 知识不一样</p>
+<p>性格不一样 心情不一样 梦想不一样</p>
+<p>价值观不一样 态度不一样 年级不一样</p>
+<p>等等等等</p>
+<p>诸多因素交织在一起</p>
+<p>所得到的关于生活的答案也不一样</p>
+<p>那么我们怎么样去写关于生活的文章呢</p>
+<p>我觉得</p>
+<p>只能通过自己所经历 所思索 所学习</p>
+<p>尽力的去求解生活的真相</p>
+<p>就像学数学的时候 我们学到公理这个词</p>
+<p>学哲学的时候 我们学到真理这个词</p>
+<p>学化学的时候 我们学到元素这个词</p>
+<p>学物理的时候 我们学到定律这个词</p>
+<p>看柯南的时候 我们知道真相只有一个一样</p>
+<p>我们需要从生活剔除使我们眼花缭乱干扰我们思想的元素</p>
+<p>直接生活的本源</p>
+<p>比如衣食住行 比如七情六欲 比如善恶美丑</p>
+<p>我们需要从生活中发现那些通用的道理和不变的元素</p>
+<p>将它们找出来 写出来</p>
+<p>它们就像沙漠中的金子一样 几亿年来就存在于那里了</p>
+<p>等待有心人去拾取</p>
+<p>它们对每一个人都是公平的</p>
+<p>它们不会被权力所垄断 </p>
+<p>而是对世界上每一个人敞开</p>
+<p>等待着有缘人去发现</p>
+<p>只要你相信它们在那里</p>
+<p>你就会找到它们</p>
+<hr>
+<p>废话到此  开始拆墙</p>
+<p>Google 这个世界上最优秀的搜索引擎</p>
+<p>被天朝的高墙所屏蔽</p>
+<p>使得国人只能使用效率低下 充满广告的百度</p>
+<p>之所以屏蔽 原因以后再说</p>
+<p>总之我们需要一种方法</p>
+<p>能够用上这个最有效率的搜索引擎</p>
+<p>能让我们搜到一个问题最相关的答案</p>
+<p>这是我们的需求 而 Google 是我们的工具</p>
+<p>方法是通过vps及ss工具</p>
+<p>在墙内和墙外建立一个秘密的通道</p>
+<p>从而穿过围墙 进入世界</p>
+<p>就像《肖申克的救赎》里面的安迪</p>
+<p><strong>而那把小锤子就是我们要用到的工具</strong></p>
+<p><strong>DigitalOcean 的 VPS 主机</strong></p>
+<p><strong>Ubuntu 16.04.1 x64 Linux系统</strong></p>
+<p><strong>Shadowsocks 服务器端及客户端</strong></p>
+<hr>
+<p>服务器端在墙外  客户端在墙内</p>
+<p>Shadowsocks 建立了一个加密通道</p>
+<p>帮助我们从墙内穿到墙外</p>
+<hr>
+<h1 id="方法如下"><a href="#方法如下" class="headerlink" title="方法如下"></a>方法如下</h1><h2 id="1-购买-DigitalOcean-VPS"><a href="#1-购买-DigitalOcean-VPS" class="headerlink" title="1 购买 DigitalOcean VPS"></a>1 购买 DigitalOcean VPS</h2><p>买每月5美元的主机就可以了，既可以建博客又可以来穿墙，很实惠了</p>
+<p><strong>512MB Ram 20GB SSD Disk SFO1 Ubuntu 16.04.1 x64</strong></p>
+<p><a href="https://m.do.co/c/a5ec87954d35" target="_blank" rel="external">地址含优惠码</a></p>
+<h2 id="2-购买VPS的时候，安装Ubuntu-16-04-1-x64系统"><a href="#2-购买VPS的时候，安装Ubuntu-16-04-1-x64系统" class="headerlink" title="2 购买VPS的时候，安装Ubuntu 16.04.1 x64系统"></a>2 购买VPS的时候，安装Ubuntu 16.04.1 x64系统</h2><h2 id="3-在自己的电脑上安装-Putty-软件，用来连接-VPS"><a href="#3-在自己的电脑上安装-Putty-软件，用来连接-VPS" class="headerlink" title="3 在自己的电脑上安装 Putty 软件，用来连接 VPS"></a>3 在自己的电脑上安装 Putty 软件，用来连接 VPS</h2><p><a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="external">Putty下载页面</a></p>
+<p><a href="https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe" target="_blank" rel="external">Windows版Putty直接下载</a></p>
+<h2 id="4-通过-Putty-安装-Shadowsocks-服务器端"><a href="#4-通过-Putty-安装-Shadowsocks-服务器端" class="headerlink" title="4 通过 Putty 安装 Shadowsocks 服务器端"></a>4 通过 Putty 安装 Shadowsocks 服务器端</h2><p>通过 Putty 连接 VPS 登录 Root 账户 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div></pre></td></tr></table></figure>
+<p>更新 apt-get</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install python-pip</div></pre></td></tr></table></figure>
+<p>安装 pip 包管理工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure>
+<p>安装 Shadowsocks</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/shadowsocks.json</div></pre></td></tr></table></figure>
+<p>进入 vi 模式修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;server&quot;:&quot;VPS服务器的ip&quot;,     //填写DigitalOcean VPS给出的服务器IP</div><div class="line">    &quot;server_port&quot;:8388,           //无需更改</div><div class="line">    &quot;local_address&quot;:&quot;127.0.0.1&quot;,  //无需更改</div><div class="line">    &quot;local_port&quot;:1080,            //无需更改</div><div class="line">    &quot;password&quot;:&quot; 连接密码 &quot;,      //自己随便设置，以后连接客户端的时候用 </div><div class="line">    &quot;timeout&quot;:300,                //无需更改</div><div class="line">    &quot;method&quot;:&quot;aes-256-cfb&quot;,       //无需更改</div><div class="line">    &quot;fast_open&quot;:false             //无需更改</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>按i进入编辑模式，</p>
+<p>esc退出编辑模式，</p>
+<p>修改完成后，退出编辑模式，</p>
+<p>输入:wq保存退出。</p>
+<p>:q!不保存退出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json -d start</div></pre></td></tr></table></figure>
+<p>应用配置文件启动服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json -d start</div></pre></td></tr></table></figure>
+<p>应用配置文件启动结束，不使用 Shadowsocks 的时候，可以关闭。</p>
+<h2 id="5-安装-Shadowsocks-客户端建立连接"><a href="#5-安装-Shadowsocks-客户端建立连接" class="headerlink" title="5 安装 Shadowsocks 客户端建立连接"></a>5 安装 Shadowsocks 客户端建立连接</h2><p><a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="external">Shadowsocks客户端下载连接</a></p>
+<h2 id="6-更改浏览器代理服务器设置"><a href="#6-更改浏览器代理服务器设置" class="headerlink" title="6 更改浏览器代理服务器设置"></a>6 更改浏览器代理服务器设置</h2><p>选择sock5模式，地址127.0.0.1，端口1080，访问 google.com 测试，大功告成。</p>
+<p><img src="http://oboi7h1gj.bkt.clouddn.com/17-2-20/94922952-file_1487523746841_12c87.jpg" alt="Shadowsocks图示"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="http://oboi7h1gj.bkt.clouddn.com/17-2-17/58686022-file_1487321410120_1443d.jpg" alt="崔小迪 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>迪的生产力工具室微信公众号,欢迎订阅</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持分享 随意打赏</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://cdn.rkidc.loveml.com/uploads/1702091055731820B82.jpg?imageView/2/w/200/q/85" alt="崔小迪 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://cdn.rkidc.loveml.com/uploads/17020910553ACA957BD.jpg?imageView/2/w/200/q/85" alt="崔小迪 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DigitalOcean/" rel="tag"># DigitalOcean</a>
+          
+            <a href="/tags/Shadowsocks/" rel="tag"># Shadowsocks</a>
+          
+            <a href="/tags/VPS/" rel="tag"># VPS</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/changshi6duideshi.html" rel="next" title="常识[6]-对的事">
+                <i class="fa fa-chevron-left"></i> 常识[6]-对的事
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/hello.html" rel="prev" title="占用您6分钟  认识一下">
+                占用您6分钟  认识一下 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/digitaloceanandubuntuanshadowsocks.html"
+           data-title="DigitalOceanVPS与Ubuntu及SS穿墙" data-url="http://www.cuixiaodi.com/posts/digitaloceanandubuntuanshadowsocks.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/logocxdsmall.jpg"
+               alt="崔小迪" />
+          <p class="site-author-name" itemprop="name">崔小迪</p>
+          <p class="site-description motion-element" itemprop="description">从事数码硬件行业十年,需要好价格好服务请找我。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法如下"><span class="nav-number">1.</span> <span class="nav-text">方法如下</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-购买-DigitalOcean-VPS"><span class="nav-number">1.1.</span> <span class="nav-text">1 购买 DigitalOcean VPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-购买VPS的时候，安装Ubuntu-16-04-1-x64系统"><span class="nav-number">1.2.</span> <span class="nav-text">2 购买VPS的时候，安装Ubuntu 16.04.1 x64系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-在自己的电脑上安装-Putty-软件，用来连接-VPS"><span class="nav-number">1.3.</span> <span class="nav-text">3 在自己的电脑上安装 Putty 软件，用来连接 VPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-通过-Putty-安装-Shadowsocks-服务器端"><span class="nav-number">1.4.</span> <span class="nav-text">4 通过 Putty 安装 Shadowsocks 服务器端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-安装-Shadowsocks-客户端建立连接"><span class="nav-number">1.5.</span> <span class="nav-text">5 安装 Shadowsocks 客户端建立连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-更改浏览器代理服务器设置"><span class="nav-number">1.6.</span> <span class="nav-text">6 更改浏览器代理服务器设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">崔小迪</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://dtools.taobao.com">DTools</a> 构建
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="http://dtools.taobao.com">
+    NexT.Muse 
+  </a>  ---  
+  <a class="theme-link" href="https://m.do.co/c/a5ec87954d35">
+    DigitalOcean主机服务
+  </a>  ---
+  <a class="theme-link" href="https://www.rkecloud.com/?refcode=84d1e126ad">
+    使用锐壳云加速
+  </a>
+  
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cuixiaodi"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
